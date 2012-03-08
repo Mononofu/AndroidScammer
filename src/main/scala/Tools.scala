@@ -1,6 +1,5 @@
 package org.furidamu.androidscammer
 
-import android.widget.SeekBar
 import android.view.View
 import android.widget.TextView
 
@@ -8,7 +7,6 @@ import android.widget.TextView
 object Constants {
 	implicit def ViewToRichView(v: View) = new RichView(v)
 	implicit def TextViewToRichTextView(v: TextView) = new RichTextview(v)
-	implicit def SeekBarToRichSeekBar(bar: SeekBar) = new RichSeekBar(bar)
 }
 
 import Constants._
@@ -23,21 +21,6 @@ class RichView(view: View) {
 		 		f()
 		 	}
 		 } ) 
-	 }
-}
-
-class RichSeekBar(bar: SeekBar) {
-	 def onSeekBarChange = throw new Exception
-	 def onSeekBarChange_= (f: (Int, Boolean) => Unit) {
-	 	bar.setOnSeekBarChangeListener(
-		 	new SeekBar.OnSeekBarChangeListener() {
-		 		def onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-		 			f(progress, fromUser)
-		 		}
-
-		    	def onStartTrackingTouch(seekBar: SeekBar) {}
-		    	def onStopTrackingTouch(seekBar: SeekBar) {}
-		 	})
 	 }
 }
 
